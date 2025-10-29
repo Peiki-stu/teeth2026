@@ -1,0 +1,211 @@
+/* 移除未使用的開場區與風暴容器樣式 */
+
+/* 已不使用的 .skull-item 樣式刪除 */
+
+/* 移除舊版 #logo 與其動畫（未使用） */
+
+/* 滾動視差與能力值燈條特效 */
+
+/* 1. 全域設定 */
+html {
+    scroll-behavior: smooth; /* 平滑滾動 */
+}
+
+body {
+    margin: 0;
+    background-color: #ffffff; /* 白色背景 */
+    color: #191919; /* 黑色文字 */
+    font-family: sans-serif;
+}
+
+/* 2. 燈條 */
+.stats-bar {
+    position: fixed; /* 固定在視窗上 */
+    background-color: rgb(39, 39, 39); /* 銀色 */
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff; /* 發光效果 */
+    z-index: 100; /* 保持在最上層 */
+}
+
+/* 3. 燈條位置 */
+.bar-top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+}
+
+.bar-left {
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100vh;
+}
+
+.bar-right {
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100vh;
+}
+
+/* 改用 #hero-logo，#logo 樣式移除（未使用） */
+
+/* 6. 一般區塊 */
+section {
+    min-height: 80vh; /* 每個區塊至少 80% 螢幕高 */
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+/* 7. 滾動視差區塊 */
+.parallax-section {
+    min-height: 100vh; /* 視差區塊占滿全螢幕 */
+    background-attachment: fixed; /* 滾動視差的核心！ */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* 重要：讓子元素的 absolute 定位相對於此容器 */
+}
+/* 簡易 HERO 舞台 */
+#hero { background:#000; }
+
+#hero-stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#hero-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 240px;
+    z-index: 10;
+    opacity: 0; /* 初始透明 */
+    animation: heroLogoIn 1200ms ease-out 100ms forwards; /* 淡入 + 微縮 */
+    transition: transform 800ms ease; /* 滑鼠靠近縮放過渡 */
+}
+
+#hero-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
+
+/* 移除未使用的 .ring-skull 樣式 */
+
+@keyframes fadePopIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 保留單一定義的 .hero-skull，移除重覆定義 */
+
+.hero-skull {
+    position: absolute;
+    width: 240px; /* 需求：240x240 */
+    height: 240px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0; /* 初始透明，交給各自動畫淡入 */
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,.6));
+    left: 50%;
+    top: 50%;
+}
+
+.hero-skull.top {
+    transform: translate(-50%, -50%) translateY(-220px);
+    animation: skullTopIn 700ms ease-out 150ms forwards;
+}
+.hero-skull.top:hover { transform: translate(-50%, -50%) translateY(-220px) scale(1.06); }
+.hero-skull.bottom {
+    transform: translate(-50%, -50%) translateY(220px) rotate(180deg);
+    animation: skullBottomIn 700ms ease-out 220ms forwards;
+}
+.hero-skull.bottom:hover { transform: translate(-50%, -50%) translateY(220px) rotate(180deg) scale(1.06); }
+.hero-skull.left {
+    transform: translate(-50%, -50%) translateX(-280px) rotate(-90deg);
+    animation: skullLeftIn 700ms ease-out 300ms forwards;
+}
+.hero-skull.left:hover { transform: translate(-50%, -50%) translateX(-280px) rotate(-90deg) scale(1.06); }
+.hero-skull.right {
+    transform: translate(-50%, -50%) translateX(280px) rotate(90deg);
+    animation: skullRightIn 700ms ease-out 380ms forwards;
+}
+.hero-skull.right:hover { transform: translate(-50%, -50%) translateX(280px) rotate(90deg) scale(1.06); }
+
+/* 純 CSS 淡入 + 微縮動畫（不影響最終位移/旋轉） */
+@keyframes heroLogoIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes skullTopIn {
+    from { opacity: 0; transform: translate(-50%, -50%) translateY(-220px) scale(0.98); }
+    to   { opacity: 1; transform: translate(-50%, -50%) translateY(-220px) scale(1); }
+}
+@keyframes skullBottomIn {
+    from { opacity: 0; transform: translate(-50%, -50%) translateY(220px) rotate(180deg) scale(0.98); }
+    to   { opacity: 1; transform: translate(-50%, -50%) translateY(220px) rotate(180deg) scale(1); }
+}
+@keyframes skullLeftIn {
+    from { opacity: 0; transform: translate(-50%, -50%) translateX(-280px) rotate(-90deg) scale(0.98); }
+    to   { opacity: 1; transform: translate(-50%, -50%) translateX(-280px) rotate(-90deg) scale(1); }
+}
+@keyframes skullRightIn {
+    from { opacity: 0; transform: translate(-50%, -50%) translateX(280px) rotate(90deg) scale(0.98); }
+    to   { opacity: 1; transform: translate(-50%, -50%) translateX(280px) rotate(90deg) scale(1); }
+}
+
+/* 外圍四張：更外圈且更小 */
+#hero-stage .hero-skull.outer { display: none; }
+
+
+/* 8. 動物圖片樣式 */
+.animal-image {
+    position: absolute;
+    max-width: 600px;
+    max-height: 600px;
+    z-index: 10;
+}
+
+.animal-image.left-top {
+    top: 20px;
+    left: 20px;
+}
+
+.animal-image.right-top {
+    top: 20px;
+    right: 20px;
+}
+
+/* 移除未使用的懸浮動畫與套用規則 */
+
+/* 9. 視差區塊的背景圖 */
+/* 移除未使用的 #home 規則 */
+
+
+
+/* 10. 文字容器 */
+.content-box {
+    background-color: rgba(27, 26, 26, 0.9); /* 半透明白底 */
+    padding: 2rem;
+    max-width: 30%;
+    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    z-index: 10;
+    position: relative;
+    color: #dbdbdb; /* 黑色文字 */
+}
+
+/* 11. 繪本預留區 */
+#illustration-placeholder {
+    min-height: 100vh;
+    border: 2px dashed #555;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #dddcdc;
+}
